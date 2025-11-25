@@ -47,13 +47,15 @@ jobs:
         run: php artisan test
 
       - name: Convert Clover to LCOV
+        if: matrix.php == '8.3'
         uses: andstor/clover2lcov-action@v1
         with:
           src: coverage/clover.xml
           dst: coverage/lcov.info
 
       - name: Upload coverage report
+        if: matrix.php == '8.3'
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report-php-${{ matrix.php }}
+          name: coverage-report
           path: coverage/
